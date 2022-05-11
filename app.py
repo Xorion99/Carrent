@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for
-from form import registration_form, LoginForm
+from form import registration_form, LoginForm, AddCarForm
 from flask_bcrypt import Bcrypt
 
 from datetime import datetime
@@ -44,6 +44,7 @@ def signup():
 def login():
     from model import User
     form = LoginForm()
+    a = AddCarForm()
     if form.validate_on_submit():
         user = User.query.filter_by(Email=form.Email.data).first()
         if user:
@@ -56,6 +57,10 @@ def login():
 
     return render_template('Login/index.html',form = form)
 
+@app.route('/addcar')
+def AddCar():  # put application's code here
+    form = AddCarForm()
+    return render_template('Addcar/index.html', form=form)
 
 
 if __name__ == '__main__':

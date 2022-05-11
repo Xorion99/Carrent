@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TelField, SubmitField, EmailField, IntegerField, DateField, TimeField, DateTimeField, RadioField
+from wtforms import StringField, PasswordField, TelField, SubmitField, EmailField, IntegerField, DateField, FileField, SelectField
 from wtforms.validators import InputRequired, Length, ValidationError, Email, DataRequired, NumberRange
 
 
@@ -48,5 +48,24 @@ class LoginForm(FlaskForm):
                              render_kw={"placeholder": "Password"})
     Submit = SubmitField("Login")
 
+class AddCarForm(FlaskForm):
+    Model = StringField(validators=[InputRequired()],
+                       render_kw={"placeholder": "Model"})
+    Year = StringField(validators=[InputRequired()],
+                          render_kw={"placeholder": "Year"})
 
+    Plate = StringField(validators=[InputRequired()],
+                       render_kw={"placeholder": "Plate"})
+
+    Category = choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')]
+
+    Number = StringField(validators=[InputRequired()],
+                       render_kw={"placeholder": "Number of seats"})
+    PiLocation = StringField(validators=[InputRequired()],
+                       render_kw={"placeholder": "Pickup location"})
+    DeLocation = StringField(validators=[InputRequired()],
+                       render_kw={"placeholder": "Delivery location"})
+    Price = StringField(validators=[InputRequired()],
+                       render_kw={"placeholder": "Daily price(EUR)"})
+    Photo = FileField()
 

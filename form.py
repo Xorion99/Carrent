@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TelField, SubmitField, EmailField, IntegerField, DateField, FileField, SelectField
+from wtforms import StringField, PasswordField, TelField, SubmitField, EmailField, IntegerField, DateField, \
+    FileField, SelectField, FloatField, RadioField
 from wtforms.validators import InputRequired, Length, ValidationError, Email, DataRequired, NumberRange
 
 
@@ -57,15 +58,21 @@ class AddCarForm(FlaskForm):
     Plate = StringField(validators=[InputRequired()],
                        render_kw={"placeholder": "Plate"})
 
-    Category = choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')]
+    Fuel = SelectField(choices=[('Hybrid'), ('py'), ('text')])
 
-    Number = StringField(validators=[InputRequired()],
+    Category = SelectField(choices=[('Hybrid'), ('py'), ('text')])
+
+    Number = IntegerField(validators=[InputRequired()],
                        render_kw={"placeholder": "Number of seats"})
     PiLocation = StringField(validators=[InputRequired()],
                        render_kw={"placeholder": "Pickup location"})
     DeLocation = StringField(validators=[InputRequired()],
                        render_kw={"placeholder": "Delivery location"})
-    Price = StringField(validators=[InputRequired()],
+    Price = FloatField(validators=[InputRequired()],
                        render_kw={"placeholder": "Daily price(EUR)"})
+    Optional = RadioField("Optional")
+
+    Submit = SubmitField ("Add car")
+
     Photo = FileField()
 

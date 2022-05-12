@@ -770,6 +770,10 @@ input {
   padding: 52px 85px;
   padding-bottom: 73px;
 }
+.category{
+  height: 150%;
+  width: 140%;
+}
 
 @media (max-width: 767px) {
   .card-5 .card-body {

@@ -1,8 +1,8 @@
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, render_template, flash, redirect, url_for, request
 from form import registration_form, LoginForm, AddCarForm
 from flask_bcrypt import Bcrypt
+from flask_uploads import configure_uploads, IMAGES, UploadSet
 
-from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -11,12 +11,27 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Database'''
 app.config['SECRET_KEY'] = 'jbhkkjbhdnslk98723bkj4sdfjiopesdfjklsfwejklò43583459@fsdokso'
+app.config['UPLOADED_IMAGES_DEST'] = 'uploads/images'
+
+images = UploadSet('images', IMAGES)
+configure_uploads(app, images)
+
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():  # put application's code here
-    return 'ciao'
+    return render_template('homepage/index.html')
+
+@app.route('/test', methods=['GET', 'POST'])
+def test():  # put application's code here
+    form = AddCarForm()
+    if request.method == "POST":
+        print(form.option.data)
+        #images.save(form.Photo.data)
+    return render_template('/test.html', form = form)
+
 
 
 @app.route('/signup', methods=['GET', 'POST'])

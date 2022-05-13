@@ -34,6 +34,22 @@ class User(db.Model):
         self.DriveLicenseExp = DriveLicenseExp
 
 
+class car(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    Model = db.Column(db.String(20), nullable=False)
+    Year = db.Column(db.Integer, nullable=False)
+    Plate = db.Column(db.String(20), nullable=False)
+    Fuel = db.Column(db.String(20), nullable=False)
+    Category = db.Column(db.String(20), nullable=False)
+    NumberOfSeats = db.Column(db.String(20), nullable=False)
+    PickupLocation = db.Column(db.String(20), nullable=False)
+    DeliveryLocation = db.Column(db.String(20), nullable=False)
+    Optional = db.Column(db.String(20), nullable=False)
+    Photo = db.Column(db.String(20), nullable=False)
+
+
+
+
 
 db.create_all()
 

@@ -130,38 +130,26 @@
                                 <div class="form">
                                     <div class="name" style="font-size: 160%">Optional</div>
                                     <br>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" style="font-size: 140%">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault"style="font-size: 130%; font-weight: bold">Automatic Transmission</label>
+                                    <div class="form-check form-check-inline">
+                                        {{ form.option (class="form-check-input",type="checkbox") }}
+                                        <label class="form-check-label" for="inlineCheckbox1">1</label>
                                     </div>
+
+
                                     <br>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="font-size: 140%">
-                                        <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 130%; font-weight: bold">Air Conditioning</label>
-                                    </div>
                                     <br>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="font-size: 140%">
-                                        <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 130%; font-weight: bold">Bluetooth</label>
+                                    <label for="formFileDisabled" class="form-label" style="font-size: 140%;font-weight: bold">Photo</label>
+                                    {{ form.Photo (class="btn btn--radius-2 btn--blue") }}
+
+                                    <div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        {{ form.Submit (class="btn btn--radius-2 btn--blue s") }}
                                     </div>
-
-
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <label for="formFileDisabled" class="form-label" style="font-size: 140%;font-weight: bold">Photo</label>
-                            {{ form.Photo (class="btn btn--radius-2 btn--blue") }}
-
-                            <div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                {{ form.Submit (class="btn btn--radius-2 btn--blue s") }}
-                            </div>
                 </form>
             </div>
         </div>

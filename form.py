@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TelField, SubmitField, EmailField, IntegerField, DateField, \
-    FileField, SelectField, FloatField, RadioField
+    FileField, SelectField, FloatField, RadioField, SelectMultipleField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError, Email, DataRequired, NumberRange
 
 
@@ -70,9 +70,8 @@ class AddCarForm(FlaskForm):
                        render_kw={"placeholder": "Delivery location"})
     Price = FloatField(validators=[InputRequired()],
                        render_kw={"placeholder": "Daily price(EUR)"})
-    Optional = RadioField("Optional")
+    option = BooleanField(default="Pippo")
+    Submit = SubmitField("Add car")
 
-    Submit = SubmitField ("Add car")
-
-    Photo = FileField()
+    Photo = FileField('image')
 

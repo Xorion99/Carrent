@@ -36,19 +36,22 @@
                 <span> <img src="/static/login/logo.png" class="w-100" alt="Logo" style="background: white"> </span><br/>
             </div>
             <div class="card-body">
-                <form method="POST">
+                <form method="POST" enctype = multipart/form-data>
+
                     <div class="form-row m-b-55">
                         <div class="name">Car</div>
                         <div class="value">
                             <div class="row row-space">
                                 <div class="col-2">
                                     <div class="input-group-desc">
+                                        {{ form.csrf_token }}
                                         {{ form.Model (class="input--style-5") }}
                                         <label class="label--desc">Model</label>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="input-group-desc">
+                                        {{ form.csrf_token }}
                                         {{ form.Year (class="input--style-5") }}
                                         <label class="label--desc">Year</label>
                                     </div>
@@ -60,6 +63,7 @@
                         <div class="name">Plate</div>
                         <div class="value">
                             <div class="input-group">
+                                {{ form.csrf_token }}
                                 {{ form.Plate (class="input--style-5") }}
                             </div>
                         </div>
@@ -84,6 +88,7 @@
                                     <div class="value">
                                         <div class="input-group">
                                             <div class="rs-select2 js-select-simple select--no-search">
+                                                {{ form.csrf_token }}
                                                 {{ form.Category (class="category") }}
                                                 <div class="select-dropdown"></div>
                                             </div>
@@ -97,6 +102,7 @@
                                     <div class="name">Number of seats</div>
                                     <div class="value">
                                         <div class="input-group">
+                                            {{ form.csrf_token }}
                                             {{form.Number (class="input--style-5")}}
                                         </div>
                                     </div>
@@ -105,6 +111,7 @@
                                     <div class="name">Pickup location</div>
                                     <div class="value">
                                         <div class="input-group">
+                                            {{ form.csrf_token }}
                                             {{form.PiLocation (class="input--style-5")}}
                                         </div>
                                     </div>
@@ -113,6 +120,7 @@
                                     <div class="name">Delivery location</div>
                                     <div class="value">
                                         <div class="input-group">
+                                            {{ form.csrf_token }}
                                             {{form.DeLocation (class="input--style-5")}}
                                         </div>
                                     </div>
@@ -121,6 +129,7 @@
                                     <div class="name">Daily price (EUR)</div>
                                     <div class="value">
                                         <div class="input-group">
+                                            {{ form.csrf_token }}
                                             {{ form.Price (class="input--style-5") }}
                                         </div>
                                     </div>
@@ -130,26 +139,40 @@
                                 <div class="form">
                                     <div class="name" style="font-size: 160%">Optional</div>
                                     <br>
-                                    <div class="form-check form-check-inline">
-                                        {{ form.option (class="form-check-input",type="checkbox") }}
-                                        <label class="form-check-label" for="inlineCheckbox1">1</label>
+
+                                    <div class="form " style="font-size: 150%">
+                                        {{ form.csrf_token }}
+                                        {{ form.AirConditioning (class="radio") }}
+                                        Automatic Trasmission
                                     </div>
-
-
+                                    <br>
+                                    <div class="form " style="font-size: 150%">
+                                        {{ form.csrf_token }}
+                                        {{ form.AirConditioning (class="radio") }}
+                                        Air Conditioning
+                                    </div>
+                                    <br>
+                                    <div class="form " style="font-size: 150%">
+                                        {{ form.csrf_token }}
+                                        {{ form.Bluetooth (class="radio") }}
+                                        Bluetooth
+                                    </div>
                                     <br>
                                     <br>
-                                    <label for="formFileDisabled" class="form-label" style="font-size: 140%;font-weight: bold">Photo</label>
-                                    {{ form.Photo (class="btn btn--radius-2 btn--blue") }}
-
+                                    <div style="font-size: 150%; font-weight: bold">
+                                        Add a photo
+                                    {{ form.csrf_token }}
+                                    {{ form.Photo (class="form-control form-control-lg")}}
+                                    </div>
                                     <div>
                                         <br>
                                         <br>
                                         <br>
                                         <br>
-                                        <br>
-                                        <br>
+                                        {{ form.csrf_token }}
                                         {{ form.Submit (class="btn btn--radius-2 btn--blue s") }}
                                     </div>
+                </form>
                 </form>
             </div>
         </div>

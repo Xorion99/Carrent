@@ -43,11 +43,11 @@ def signup():
              flash('password do not match')
         else:
             ashed_password = bcrypt.generate_password_hash(form.Password.data)
-            user = User(Email= form.Email.data, Password = ashed_password, Name= form.Name.data,
-                        Surname = form.Surname.data, Phone = form.Telephone.data,BirthData = form.Birthdate.data,
-                        IdcardNumber = form.CardNumber.data, Municipality = form.Municipality.data,
-                        IdcardExp = form.IdcardExp.data, Iban = form.Iban.data, DriveLicense =form.DriveLicense.data,
-                        Department = form.Department.data, DriveLicenseExp = form.driveExp.data)
+            user = User(form.Email.data, ashed_password,form.Name.data,
+                        form.Surname.data, form.Telephone.data,form.Birthdate.data,
+                        form.CardNumber.data, form.Municipality.data,
+                        form.IdcardExp.data, form.Iban.data, form.DriveLicense.data,
+                        form.Department.data,  form.driveExp.data)
             db.session.add(user)
             db.session.commit()
             print("PIPPO")
@@ -72,9 +72,35 @@ def login():
 
     return render_template('Login/index.html',form = form)
 
-@app.route('/addcar')
+@app.route('/addcar', methods=['GET', 'POST'])
 def AddCar():  # put application's code here
+    from model import car
     form = AddCarForm()
+    if form.validate_on_submit():
+        print("ciao")
+        if(form.AutomaticTransmission.data == True ):
+            Automatic = "Automatic Trasmission"
+        else:
+            Automatic = ""
+        if(form.AirConditioning.data == True):
+            Air = "Air Conditioning"
+        else:
+            Air = ""
+        if(form.Bluetooth.data == True):
+            Blue = "Bluetooth"
+        else:
+            Blue = ""
+        Car = car(form.Model.data, form.Year.data, form.Plate.data,
+                  form.Fuel.data,form.Category.data,form.Number.data,
+                  form.PiLocation.data, form.DeLocation.data,
+                  (Automatic + " " + Air +" "+ Blue), form.Photo.data)
+        db.session.add(Car)
+        db.session.commit()
+        images.save(form.Photo.data)
+        return redirect(url_for('index'))
+
+
+
     return render_template('Addcar/index.html', form=form)
 
 

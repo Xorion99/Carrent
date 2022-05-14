@@ -58,9 +58,11 @@ class AddCarForm(FlaskForm):
     Plate = StringField(validators=[InputRequired()],
                        render_kw={"placeholder": "Plate"})
 
-    Fuel = SelectField(choices=[('Hybrid'), ('py'), ('text')])
+    Fuel = SelectField(choices=[('Electric'), ('Hydrogen'), ('Hybrid'),('Natural Gas'),
+                                ('LPG'), ('Petrol'),('Diesel')])
 
-    Category = SelectField(choices=[('Hybrid'), ('py'), ('text')])
+    Category = SelectField(choices=[('Small'), ('Medium'), ('Estate'),('Large'),
+                                    ('Premium'),('Minivan'),('SUV')])
 
     Number = IntegerField(validators=[InputRequired()],
                        render_kw={"placeholder": "Number of seats"})
@@ -70,7 +72,12 @@ class AddCarForm(FlaskForm):
                        render_kw={"placeholder": "Delivery location"})
     Price = FloatField(validators=[InputRequired()],
                        render_kw={"placeholder": "Daily price(EUR)"})
-    option = BooleanField(default="Pippo")
+    AutomaticTransmission = BooleanField()
+
+    AirConditioning = BooleanField()
+
+    Bluetooth = BooleanField()
+
     Submit = SubmitField("Add car")
 
     Photo = FileField('image')

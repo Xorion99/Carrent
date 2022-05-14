@@ -283,27 +283,27 @@ h6 {
 }
 
 .bg-gra-01 {
-  background: -webkit-gradient(linear, left bottom, left top, from(#fbc2eb), to(#a18cd1));
-  background: -webkit-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
-  background: -moz-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
-  background: -o-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
-  background: linear-gradient(to top, #fbc2eb 0%, #a18cd1 100%);
+  background: -webkit-gradient(linear, left bottom, left top, from(#117cb0), to(#a18cd1));
+  background: -webkit-linear-gradient(bottom, #117cb0 0%, #117cb0 100%);
+  background: -moz-linear-gradient(bottom, #117cb0 0%, #117cb0 100%);
+  background: -o-linear-gradient(bottom, #117cb0 0%, #117cb0 100%);
+  background: linear-gradient(to top, #117cb0 0%, #117cb0 100%);
 }
 
 .bg-gra-02 {
-  background: -webkit-gradient(linear, left bottom, right top, from(#fc2c77), to(#6c4079));
-  background: -webkit-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-  background: -moz-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-  background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
-  background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%);
+  background: -webkit-gradient(linear, left bottom, right top, from(#117cb0), to(#6c4079));
+  background: -webkit-linear-gradient(bottom left, #117cb0 0%, #117cb0 100%);
+  background: -moz-linear-gradient(bottom left, #117cb0 0%, #117cb0 100%);
+  background: -o-linear-gradient(bottom left, #117cb0 0%, #117cb0 100%);
+  background: linear-gradient(to top right, #117cb0 0%, #117cb0 100%);
 }
 
 .bg-gra-03 {
-  background: -webkit-gradient(linear, left bottom, right top, from(#08aeea), to(#b721ff));
-  background: -webkit-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
-  background: -moz-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
-  background: -o-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
-  background: linear-gradient(to top right, #08aeea 0%, #b721ff 100%);
+  background: -webkit-gradient(linear, left bottom, right top, from(#117cb0), to(#b721ff));
+  background: -webkit-linear-gradient(bottom left, #117cb0 0%, #117cb0 100%);
+  background: -moz-linear-gradient(bottom left, #117cb0 0%,#117cb0 100%);
+  background: -o-linear-gradient(bottom left, #117cb0 0%, #117cb0 100%);
+  background: linear-gradient(to top right, #117cb0 0%, #117cb0 100%);
 }
 
 /* ==========================================================================
@@ -768,6 +768,11 @@ input {
 .category{
   height: 150%;
   width: 140%;
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
 }
 
 @media (max-width: 767px) {

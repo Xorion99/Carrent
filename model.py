@@ -16,7 +16,7 @@ class User(db.Model):
     Department = db.Column(db.String(20), nullable=False)
     DriveLicenseExp = db.Column(db.DateTime(20), nullable=False)
 
-    def __int__(self, Email, Password,Name,Surname,Phone,BirthData,
+    def __init__(self, Email, Password,Name,Surname,Phone,BirthData,
                 IdcardNumber,Municipality,IdcardExp,Iban,DriveLicense,
                 Department,DriveLicenseExp):
         self.Email = Email
@@ -45,9 +45,21 @@ class car(db.Model):
     PickupLocation = db.Column(db.String(20), nullable=False)
     DeliveryLocation = db.Column(db.String(20), nullable=False)
     Optional = db.Column(db.String(20), nullable=False)
-    Photo = db.Column(db.String(20), nullable=False)
+    Photo = db.Column(db.String(20))
 
-
+    def __init__(self,Model, Year, Plate,Fuel,Category,
+                 NumberOfSeats,PickupLocation,DeliveryLocation,Optional,
+                 Photo):
+        self.Model = Model
+        self.Year = Year
+        self.Plate = Plate
+        self.Fuel = Fuel
+        self.Category = Category
+        self.NumberOfSeats = NumberOfSeats
+        self.PickupLocation = PickupLocation
+        self.DeliveryLocation = DeliveryLocation
+        self.Optional = Optional
+        self.Photo = Photo
 
 
 

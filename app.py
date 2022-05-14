@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, redirect, url_for, request
 from form import registration_form, LoginForm, AddCarForm
 from flask_bcrypt import Bcrypt
 from flask_uploads import configure_uploads, IMAGES, UploadSet
+from flask_uploads.exceptions import UploadNotAllowed
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -77,7 +78,11 @@ def AddCar():  # put application's code here
     from model import car
     form = AddCarForm()
     if form.validate_on_submit():
-        print("ciao")
+        if (form.Photo.data):
+            filename = images.save(form.Photo.data)
+        else:
+            filename = "nothing.png"
+
         if(form.AutomaticTransmission.data == True ):
             Automatic = "Automatic Trasmission"
         else:
@@ -90,13 +95,17 @@ def AddCar():  # put application's code here
             Blue = "Bluetooth"
         else:
             Blue = ""
+
+        option = Automatic + " " + Air +" "+ Blue
+
         Car = car(form.Model.data, form.Year.data, form.Plate.data,
                   form.Fuel.data,form.Category.data,form.Number.data,
                   form.PiLocation.data, form.DeLocation.data,
-                  (Automatic + " " + Air +" "+ Blue), form.Photo.data)
+                  option, filename)
         db.session.add(Car)
         db.session.commit()
-        images.save(form.Photo.data)
+        if(form.Photo.data):
+            images.save(form.Photo.data)
         return redirect(url_for('index'))
 
 

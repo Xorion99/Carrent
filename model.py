@@ -17,8 +17,8 @@ class User(db.Model):
     DriveLicenseExp = db.Column(db.DateTime(20), nullable=False)
 
     def __init__(self, Email, Password,Name,Surname,Phone,BirthData,
-                IdcardNumber,Municipality,IdcardExp,Iban,DriveLicense,
-                Department,DriveLicenseExp):
+                 IdcardNumber,Municipality,IdcardExp,Iban,DriveLicense,
+                 Department,DriveLicenseExp):
         self.Email = Email
         self.Password = Password
         self.Name = Name

@@ -2,7 +2,7 @@ from flask import Flask, render_template, flash, redirect, url_for, request
 from form import registration_form, LoginForm, AddCarForm
 from flask_bcrypt import Bcrypt
 from flask_uploads import configure_uploads, IMAGES, UploadSet
-from flask_uploads.exceptions import UploadNotAllowed
+
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Database'''
 app.config['SECRET_KEY'] = 'jbhkkjbhdnslk98723bkj4sdfjiopesdfjklsfwejklò43583459@fsdokso'
-app.config['UPLOADED_IMAGES_DEST'] = 'uploads/images'
+app.config['UPLOADED_IMAGES_DEST'] = 'static/uploads'
 
 images = UploadSet('images', IMAGES)
 configure_uploads(app, images)
@@ -73,8 +73,8 @@ def login():
 
     return render_template('Login/index.html',form = form)
 
-@app.route('/addcar', methods=['GET', 'POST'])
-def AddCar():  # put application's code here
+@app.route('/addcar/<int:id>', methods=['GET', 'POST'])
+def AddCar():
     from model import car
     form = AddCarForm()
     if form.validate_on_submit():
@@ -104,13 +104,13 @@ def AddCar():  # put application's code here
                   option, filename)
         db.session.add(Car)
         db.session.commit()
-        if(form.Photo.data):
-            images.save(form.Photo.data)
         return redirect(url_for('index'))
 
 
 
     return render_template('Addcar/index.html', form=form)
+
+
 
 
 if __name__ == '__main__':

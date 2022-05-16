@@ -52,9 +52,8 @@ background: linear-gradient(to right, #333399, #117cb0); /* W3C, IE 10+/ Edge, F
 }
 
 .navbar {
-  position: sticky;
+
   top: 0;
-  display:flex;
   overflow:hidden;
   justify-content: center;
   height: 100px;
@@ -352,3 +351,4 @@ section {
 	}
 
 }
+/* PARTE CARD */

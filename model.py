@@ -44,11 +44,13 @@ class car(db.Model):
     NumberOfSeats = db.Column(db.String(20), nullable=False)
     PickupLocation = db.Column(db.String(20), nullable=False)
     DeliveryLocation = db.Column(db.String(20), nullable=False)
+    DailyPrice = db.Column(db.Integer, nullable=False)
     Optional = db.Column(db.String(20), nullable=False)
     Photo = db.Column(db.String(20))
 
+
     def __init__(self,Model, Year, Plate,Fuel,Category,
-                 NumberOfSeats,PickupLocation,DeliveryLocation,Optional,
+                 NumberOfSeats,PickupLocation,DeliveryLocation,DailyPrice,Optional,
                  Photo):
         self.Model = Model
         self.Year = Year
@@ -58,6 +60,7 @@ class car(db.Model):
         self.NumberOfSeats = NumberOfSeats
         self.PickupLocation = PickupLocation
         self.DeliveryLocation = DeliveryLocation
+        self.DailyPrice = DailyPrice
         self.Optional = Optional
         self.Photo = Photo
 

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, request
+from flask import Flask, render_template, flash, redirect, url_for, request, session
 from form import registration_form, LoginForm, AddCarForm
 from flask_bcrypt import Bcrypt
 from flask_uploads import configure_uploads, IMAGES, UploadSet
@@ -20,64 +20,24 @@ configure_uploads(app, images)
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+my_car = []
+
 
 @app.route('/')
-def index():  # put application's code here
-    return render_template('homepage/index.html')
-
-@app.route('/test', methods=['GET', 'POST'])
-def test():  # put application's code here
-    form = AddCarForm()
-    if request.method == "POST":
-        print(form.option.data)
-        #images.save(form.Photo.data)
-    return render_template('/test.html', form = form)
+def index():
+    global my_car
+    return render_template('homepage/index.html', my_car = my_car)
 
 
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    from model import User
-    form = registration_form()
-    if form.validate_on_submit():
-        if form.Password.data != form.Confirm_password.data:
-             flash('password do not match')
-        else:
-            ashed_password = bcrypt.generate_password_hash(form.Password.data)
-            user = User(form.Email.data, ashed_password,form.Name.data,
-                        form.Surname.data, form.Telephone.data,form.Birthdate.data,
-                        form.CardNumber.data, form.Municipality.data,
-                        form.IdcardExp.data, form.Iban.data, form.DriveLicense.data,
-                        form.Department.data,  form.driveExp.data)
-            db.session.add(user)
-            db.session.commit()
-            print("PIPPO")
-            return redirect(url_for('login'))
-    return render_template('registration/index.html', form=form)
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    from model import User
-    form = LoginForm()
-    a = AddCarForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(Email=form.Email.data).first()
-        if user:
-            if bcrypt.check_password_hash(user.Password, form.Password.data):
-                return redirect(url_for('index'))
-            else:
-                flash('Wrong Password')
-        else:
-            flash('Wrong Email')
-
-    return render_template('Login/index.html',form = form)
-
-@app.route('/addcar/<int:id>', methods=['GET', 'POST'])
+@app.route('/addcar', methods=['GET', 'POST'])
 def AddCar():
     from model import car
     form = AddCarForm()
+    global my_car
+    i = 0
     if form.validate_on_submit():
+
         if (form.Photo.data):
             filename = images.save(form.Photo.data)
         else:
@@ -100,15 +60,66 @@ def AddCar():
 
         Car = car(form.Model.data, form.Year.data, form.Plate.data,
                   form.Fuel.data,form.Category.data,form.Number.data,
-                  form.PiLocation.data, form.DeLocation.data,
-                  option, filename)
+                  form.PiLocation.data, form.DeLocation.data,form.Price.data,
+                  option,filename)
         db.session.add(Car)
         db.session.commit()
+        my_car.insert(i, car(form.Model.data, form.Year.data, form.Plate.data,
+                      form.Fuel.data,form.Category.data,form.Number.data,
+                      form.PiLocation.data, form.DeLocation.data, form.Price.data,
+                      option, filename))
+
+        print(my_car[0].Model)
+        i = i + 1
         return redirect(url_for('index'))
-
-
-
     return render_template('Addcar/index.html', form=form)
+
+
+
+
+
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    from model import User
+    form = registration_form()
+    if form.validate_on_submit():
+        if form.Password.data != form.Confirm_password.data:
+            flash('password do not match')
+        else:
+            ashed_password = bcrypt.generate_password_hash(form.Password.data)
+            user = User(form.Email.data, ashed_password,form.Name.data,
+                        form.Surname.data, form.Telephone.data,form.Birthdate.data,
+                        form.CardNumber.data, form.Municipality.data,
+                        form.IdcardExp.data, form.Iban.data, form.DriveLicense.data,
+                        form.Department.data,  form.driveExp.data)
+            db.session.add(user)
+            db.session.commit()
+            print("ciao")
+            return redirect(url_for('login'))
+    return render_template('registration/index.html', form=form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    from model import User
+    form = LoginForm()
+    a = AddCarForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(Email=form.Email.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.Password, form.Password.data):
+                return redirect(url_for('index'))
+            else:
+                flash('Wrong Password')
+        else:
+            flash('Wrong Email')
+
+    return render_template('Login/index.html',form = form)
+
+
+
 
 
 

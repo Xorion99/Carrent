@@ -25,8 +25,9 @@ my_car = []
 
 @app.route('/')
 def index():
+    from model import car
     global my_car
-    return render_template('homepage/index.html', my_car = my_car)
+    return render_template('homepage/index.html', my_car = my_car, cars=car)
 
 
 
@@ -46,15 +47,15 @@ def AddCar():
         if(form.AutomaticTransmission.data == True ):
             Automatic = "Automatic Trasmission"
         else:
-            Automatic = ""
+            Automatic = " "
         if(form.AirConditioning.data == True):
             Air = "Air Conditioning"
         else:
-            Air = ""
+            Air = " "
         if(form.Bluetooth.data == True):
             Blue = "Bluetooth"
         else:
-            Blue = ""
+            Blue = " "
 
         option = Automatic + " " + Air +" "+ Blue
 
@@ -117,6 +118,20 @@ def login():
             flash('Wrong Email')
 
     return render_template('Login/index.html',form = form)
+
+
+@app.route('/infocar/<Platecar>', methods=["GET","POST"])
+def infocar(Platecar):
+    global my_car
+    from model import car
+    infocar = None
+    print(Platecar)
+    for i in range(len(my_car)):
+        print("jkl")
+        if my_car[i].Plate == Platecar:
+            infocar = my_car[i]
+            print("diocane")
+    return render_template('Infocar/index.html', infocar = infocar)
 
 
 

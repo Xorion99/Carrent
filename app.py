@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for, request, session
-from form import registration_form, LoginForm, AddCarForm, AddAvailabilityForm
+from form import registration_form, LoginForm, AddCarForm, AddAvailabilityForm, SearchCarForm
 from flask_bcrypt import Bcrypt
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 
@@ -123,6 +123,7 @@ def login():
 
 @app.route('/infocar/<Platecar>', methods=["GET","POST"])
 def infocar(Platecar):
+    from model import Rented
     global my_car
     form = AddAvailabilityForm()
     infocar = None
@@ -131,7 +132,18 @@ def infocar(Platecar):
         print("jkl")
         if my_car[i].Plate == Platecar:
             infocar = my_car[i]
-            print("diocane")
+            if form.validate_on_submit():
+                print("ciaoo")
+                car_rented = Rented(infocar.Model,infocar.Year,infocar.Plate,
+                                    infocar.Fuel,infocar.Category,infocar.NumberOfSeats,
+                                    infocar.PickupLocation,infocar.DeliveryLocation,
+                                    infocar.DailyPrice, infocar.Optional,infocar.Photo,
+                                    form.StartDate.data,form.EndDate.data)
+                db.session.add(car_rented)
+                db.session.commit()
+                return redirect(url_for('payment'))
+
+
     return render_template('Infocar/index.html', infocar = infocar, form = form)
 
 
@@ -142,6 +154,19 @@ def logout():
     session['logged_in'] = False
     return render_template('homepage/index.html', form = form)
 
+
+@app.route("/searchcar")
+def search():
+    form = SearchCarForm()
+    if form.validate_on_submit():
+        start = form.StartDate.data
+        end = form.EndDate.data
+    return render_template('Search_Car/index.html', form = form)
+
+
+@app.route("/payment")
+def payment():
+    return render_template('payment/index.html')
 
 
 if __name__ == '__main__':

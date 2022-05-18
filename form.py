@@ -89,3 +89,11 @@ class AddAvailabilityForm(FlaskForm):
     EndDate = DateField(validators=[InputRequired()],
                         render_kw={"placeholder": "Birth date"})
     Submit = SubmitField("Submit")
+
+
+class SearchCarForm(FlaskForm):
+    StartDate = DateField(validators=[InputRequired()],
+                          render_kw={"placeholder": "Birth date"})
+    EndDate = DateField(validators=[InputRequired()],
+                        render_kw={"placeholder": "Birth date"})
+    Submit = SubmitField("Search")

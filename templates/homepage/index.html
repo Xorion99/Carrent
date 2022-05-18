@@ -32,7 +32,11 @@
             {% endif %}
         </div>
         <div class="subnav">
-            <button onclick="window.location.href='/signup'" class="subnavbtn">Register</button>
+            {% if session['logged_in'] %}
+            <button onclick="window.location.href='/myrental'" class="subnavbtn">My rental</button>
+            {% else %}
+            <button onclick="window.location.href='/login'" class="subnavbtn">Register</button>
+            {% endif %}
         </div>
 
 
@@ -59,7 +63,7 @@
         <p  class="h1" style="position: absolute;left: 54%;top: 30%;font-size: 150%">ADD A CAR</p>
     </div>
         <div>
-        <a href="/addcar" target="_blank"><img src="/static/homepage/search.png" title="Titolo bottone" alt="Testo alternativo" style="width: 8%;position: relative;left: 38%;margin-top: -8%"/></a>
+        <a href="/searchcar" target="_blank"><img src="/static/homepage/search.png" title="Titolo bottone" alt="Testo alternativo" style="width: 8%;position: relative;left: 38%;margin-top: -8%"/></a>
         <p  class="h1" style="position: absolute;left: 33%;top: 30%;font-size: 150%">SEARCH CAR</p>
     </div>
 

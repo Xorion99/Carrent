@@ -18,9 +18,13 @@ images = UploadSet('images', IMAGES)
 configure_uploads(app, images)
 
 
-db = SQLAlchemy(app)
+
+db = SQLAlchemy(app, session_options={
+    'expire_on_commit': False
+})
 bcrypt = Bcrypt(app)
 my_car = []
+rental_car = []
 
 
 @app.route('/')
@@ -125,9 +129,11 @@ def login():
 def infocar(Platecar):
     from model import Rented
     global my_car
+    global rental_car
     form = AddAvailabilityForm()
     infocar = None
     print(Platecar)
+    j = 0
     for i in range(len(my_car)):
         print("jkl")
         if my_car[i].Plate == Platecar:
@@ -139,13 +145,21 @@ def infocar(Platecar):
                                     infocar.PickupLocation,infocar.DeliveryLocation,
                                     infocar.DailyPrice, infocar.Optional,infocar.Photo,
                                     form.StartDate.data,form.EndDate.data)
+                rental_car.insert(j,car_rented)
+
                 db.session.add(car_rented)
                 db.session.commit()
+                j = j + 1
                 return redirect(url_for('payment'))
 
 
     return render_template('Infocar/index.html', infocar = infocar, form = form)
 
+
+@app.route("/myrental")
+def myrental():
+    global rental_car
+    return render_template('myrental/index.html',rental_car = rental_car)
 
 
 @app.route("/logout")
@@ -155,13 +169,21 @@ def logout():
     return render_template('homepage/index.html', form = form)
 
 
-@app.route("/searchcar")
+@app.route("/searchcar", methods=['GET', 'POST'])
 def search():
+    i = 0
+    global rental_car
     form = SearchCarForm()
+    car = []
     if form.validate_on_submit():
         start = form.StartDate.data
         end = form.EndDate.data
-    return render_template('Search_Car/index.html', form = form)
+        for i in range(len(rental_car)):
+            if rental_car[i].Start == start and rental_car[i].End == end:
+                car.insert(i,rental_car[i])
+                i = i + 1
+
+    return render_template('Search_Car/index.html', form = form, car = car)
 
 
 @app.route("/payment")

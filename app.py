@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for, request, session
-from form import registration_form, LoginForm, AddCarForm
+from form import registration_form, LoginForm, AddCarForm, AddAvailabilityForm
 from flask_bcrypt import Bcrypt
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 
@@ -111,6 +111,7 @@ def login():
         user = User.query.filter_by(Email=form.Email.data).first()
         if user:
             if bcrypt.check_password_hash(user.Password, form.Password.data):
+                session['logged_in'] = True
                 return redirect(url_for('index'))
             else:
                 flash('Wrong Password')
@@ -123,7 +124,7 @@ def login():
 @app.route('/infocar/<Platecar>', methods=["GET","POST"])
 def infocar(Platecar):
     global my_car
-    from model import car
+    form = AddAvailabilityForm()
     infocar = None
     print(Platecar)
     for i in range(len(my_car)):
@@ -131,11 +132,15 @@ def infocar(Platecar):
         if my_car[i].Plate == Platecar:
             infocar = my_car[i]
             print("diocane")
-    return render_template('Infocar/index.html', infocar = infocar)
+    return render_template('Infocar/index.html', infocar = infocar, form = form)
 
 
 
-
+@app.route("/logout")
+def logout():
+    form = LoginForm()
+    session['logged_in'] = False
+    return render_template('homepage/index.html', form = form)
 
 
 

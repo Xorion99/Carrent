@@ -82,3 +82,10 @@ class AddCarForm(FlaskForm):
 
     Photo = FileField('image')
 
+
+class AddAvailabilityForm(FlaskForm):
+    StartDate = DateField(validators=[InputRequired()],
+                          render_kw={"placeholder": "Birth date"})
+    EndDate = DateField(validators=[InputRequired()],
+                        render_kw={"placeholder": "Birth date"})
+    Submit = SubmitField("Submit")

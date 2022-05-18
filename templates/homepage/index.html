@@ -23,26 +23,47 @@
     <div id="trapezoid">
 
         <a class="sub-home" href="#">Home</a>
-        <a href="#About" class="expandHome">About</a>
-        <div class="subnav">
-            <button class="subnavbtn">Clients</button>
 
+        <div class="subnav">
+            {% if session['logged_in'] %}
+                <button onclick="window.location.href='/logout'" class="subnavbtn">Logout</button>
+            {% else %}
+                <button onclick="window.location.href='/login'" class="subnavbtn">Login</button>
+            {% endif %}
+        </div>
+        <div class="subnav">
+            <button onclick="window.location.href='/signup'" class="subnavbtn">Register</button>
         </div>
 
+
+
+
         <div class="subnav">
+
+
             <button href="#" class="subnavbtn">Services</button>
 
         </div>
         <a href="#" class="expandHome">Contact</a>
+
     </div>
+
+
+
 </nav>
 
+{% if session['logged_in'] %}
 
-<div>
-    <a href="/addcar" target="_blank"><img src="/static/homepage/addcar.png" title="Titolo bottone" alt="Testo alternativo" style="width: 8%;position: relative;left: 47%"/></a>
-    <p  class="h1" style="position: absolute;left: 46%;top: 30%;font-size: 150%">ADD A CAR</p>
-</div>
+    <div>
+        <a href="/addcar" target="_blank"><img src="/static/homepage/addcar.png" title="Titolo bottone" alt="Testo alternativo" style="width: 8%;position: relative;left: 55%; margin-top:-1.5%"/></a>
+        <p  class="h1" style="position: absolute;left: 54%;top: 30%;font-size: 150%">ADD A CAR</p>
+    </div>
+        <div>
+        <a href="/addcar" target="_blank"><img src="/static/homepage/search.png" title="Titolo bottone" alt="Testo alternativo" style="width: 8%;position: relative;left: 38%;margin-top: -8%"/></a>
+        <p  class="h1" style="position: absolute;left: 33%;top: 30%;font-size: 150%">SEARCH CAR</p>
+    </div>
 
+{% endif %}
 
 <img src="/static/login/logo.png" class="img-fluid" alt="Logo" style="position: fixed;top:35%;width: 100%;">
 
@@ -82,11 +103,15 @@
         </div>
     {% endfor %}
 {% else %}
+    {% if session['logged_in'] %}
+        <div class="Nocar" style="position: absolute;top: 75%;left: 40%">
+            <p>you haven't added any cars yet</p>
+        </div>
+    {% endif %}
 
 
-    <p>you haven't added any cars yet</p>
 {% endif %}
-<!-- FINE PARTE CARD                -->
+<!-- FINE PARTE CARD -->
 
 
 

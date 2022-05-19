@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='Available/style.css') }}">
+</head>
+<body>
+<h1 style="position: absolute;left: 43%">MY AVAIBLE CAR</h1>
+<br>
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        {% if rental_car|length %}
+            {% for items in rental_car %}
+                {% if items['Email'] == logged_user %}
+                    <div class="col-md-6 col-lg-4 g-mb-30">
+                        <article class="u-shadow-v18 g-bg-white text-center rounded g-px-20 g-py-40 g-mb-5">
+                            <img class="d-inline-block img-fluid mb-4" src="static/uploads/{{ items['Photo']}}" alt="Image Description">
+                            <h4 class="h5 g-color-black g-font-weight-600 g-mb-10">{{items['Model']}}</h4>
+                            <p>Start: {{items['Start'] }}</p>
+                            <p>End: {{items['End'] }}</p>
+                            <span class="d-block g-color-primary g-font-size-16"><p>Daily Price:</p> {{ items['DailyPrice'] }}€</span>
+                            <br>
+                            <button type="button" class="btn btn-danger" onclick="window.location.href='/delete/{{ items['Plate'] }}'">Delete</button>
+                        </article>
+
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    </div>
+</div>
+
+
+
+</body>
+</html>

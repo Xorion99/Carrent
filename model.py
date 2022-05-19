@@ -36,6 +36,7 @@ class User(db.Model):
 
 class car(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    Email = db.Column(db.String(20), nullable=False)
     Model = db.Column(db.String(20), nullable=False)
     Year = db.Column(db.Integer, nullable=False)
     Plate = db.Column(db.String(20), nullable=False)
@@ -49,9 +50,10 @@ class car(db.Model):
     Photo = db.Column(db.String(20))
 
 
-    def __init__(self,Model, Year, Plate,Fuel,Category,
+    def __init__(self,Email,Model, Year, Plate,Fuel,Category,
                  NumberOfSeats,PickupLocation,DeliveryLocation,DailyPrice,Optional,
                  Photo):
+        self.Email = Email
         self.Model = Model
         self.Year = Year
         self.Plate = Plate
@@ -67,6 +69,7 @@ class car(db.Model):
 
 class Rented(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    Email = db.Column(db.String(20), nullable=False)
     Model = db.Column(db.String(20), nullable=False)
     Year = db.Column(db.Integer, nullable=False)
     Plate = db.Column(db.String(20), nullable=False)
@@ -81,8 +84,9 @@ class Rented(db.Model):
     Start = db.Column(db.DateTime(20), nullable=False)
     End = db.Column(db.DateTime(20), nullable=False)
 
-    def __init__(self,Model,Year,Plate,Fuel,Category,NumberOfSeats,
+    def __init__(self,Email,Model,Year,Plate,Fuel,Category,NumberOfSeats,
                  PickupLocation,DeliveryLocation,DailyPrice,Optional,Photo,Start,End):
+        self.Email = Email
         self.Model = Model
         self.Year = Year
         self.Plate = Plate

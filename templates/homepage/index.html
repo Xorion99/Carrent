@@ -33,22 +33,24 @@
         </div>
         <div class="subnav">
             {% if session['logged_in'] %}
-            <button onclick="window.location.href='/myrental'" class="subnavbtn">My rental</button>
+            <button onclick="window.location.href='/Available'" class="subnavbtn">Available Car</button>
             {% else %}
-            <button onclick="window.location.href='/login'" class="subnavbtn">Register</button>
+            <button onclick="window.location.href='/signup'" class="subnavbtn">Register</button>
             {% endif %}
         </div>
 
 
-
-
         <div class="subnav">
+            {% if session['logged_in'] %}
+                <button onclick="window.location.href='/myrental'" class="subnavbtn">My Rental</button>
 
+            {% else %}
+                <button href="#" class="subnavbtn">Services</button>
+            {% endif %}
 
-            <button href="#" class="subnavbtn">Services</button>
 
         </div>
-        <a href="#" class="expandHome">Contact</a>
+        <a href="#" class="expandHome">About Us</a>
 
     </div>
 
@@ -76,6 +78,7 @@
 
 {% if my_car|length %}
     {% for car in my_car %}
+        {% if car['Email'] == logged_user %}
 
         <div style="position: relative;margin-top: 20%">
             <div class="d-flex justify-content-center container mt-5">
@@ -105,6 +108,7 @@
 
         </div>
         </div>
+        {% endif %}
     {% endfor %}
 {% else %}
     {% if session['logged_in'] %}

@@ -33,6 +33,13 @@
                             <span class="d-block g-color-primary g-font-size-16"><p>Daily Price:</p> {{ items['DailyPrice'] }}€</span>
                             <br>
                             <button type="button" class="btn btn-danger" onclick="window.location.href='/delete/{{ items['Plate'] }}'">Delete</button>
+                            {% for update in rented_car %}
+                                {% if update['Plate'] == items['Plate'] %}
+                                <p style="color: red">Rented</p>
+                            {% endif %}
+                        {% endfor %}
+
+
                         </article>
 
                     </div>

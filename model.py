@@ -67,6 +67,43 @@ class car(db.Model):
         self.Photo = Photo
 
 
+
+
+class Available(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    Email = db.Column(db.String(20), nullable=False)
+    Model = db.Column(db.String(20), nullable=False)
+    Year = db.Column(db.Integer, nullable=False)
+    Plate = db.Column(db.String(20), nullable=False)
+    Fuel = db.Column(db.String(20), nullable=False)
+    Category = db.Column(db.String(20), nullable=False)
+    NumberOfSeats = db.Column(db.String(20), nullable=False)
+    PickupLocation = db.Column(db.String(20), nullable=False)
+    DeliveryLocation = db.Column(db.String(20), nullable=False)
+    DailyPrice = db.Column(db.Integer, nullable=False)
+    Optional = db.Column(db.String(20), nullable=False)
+    Photo = db.Column(db.String(20))
+    Start = db.Column(db.DateTime(20), nullable=False)
+    End = db.Column(db.DateTime(20), nullable=False)
+
+    def __init__(self,Email,Model,Year,Plate,Fuel,Category,NumberOfSeats,
+                 PickupLocation,DeliveryLocation,DailyPrice,Optional,Photo,Start,End):
+        self.Email = Email
+        self.Model = Model
+        self.Year = Year
+        self.Plate = Plate
+        self.Fuel = Fuel
+        self.Category = Category
+        self.NumberOfSeats = NumberOfSeats
+        self.PickupLocation = PickupLocation
+        self.DeliveryLocation = DeliveryLocation
+        self.DailyPrice = DailyPrice
+        self.Optional = Optional
+        self.Photo = Photo
+        self.Start =Start
+        self.End = End
+
+
 class Rented(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     Email = db.Column(db.String(20), nullable=False)
@@ -100,6 +137,10 @@ class Rented(db.Model):
         self.Photo = Photo
         self.Start =Start
         self.End = End
+
+
+
+
 
 
 db.create_all()

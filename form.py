@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TelField, SubmitField, EmailField, IntegerField, DateField, \
     FileField, SelectField, FloatField, RadioField, SelectMultipleField, BooleanField
-from wtforms.validators import InputRequired, Length, ValidationError, Email, DataRequired, NumberRange
+from wtforms.validators import InputRequired, Length, Email
 
 
 class registration_form (FlaskForm):
@@ -89,6 +89,7 @@ class AddAvailabilityForm(FlaskForm):
     EndDate = DateField(validators=[InputRequired()],
                         render_kw={"placeholder": "Birth date"})
     Submit = SubmitField("Submit")
+
 
 
 class SearchCarForm(FlaskForm):

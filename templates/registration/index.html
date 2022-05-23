@@ -1,139 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-<title>Bootstrap Sign up Form with Icons</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='registration/style.css') }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='registration/style.css') }}">
 </head>
 <body>
 <div class="signup-form">
     <img src="/static/login/logo.png" class="w-100" alt="Logo" style="background: white;width: 100%">
     <form action="#" method="post" action="/signup">
-		<h2>Sign Up</h2>
-		<p>Please fill in this form to create an account!</p>
-		<hr>
+        <h2>Sign Up</h2>
+        <p>Please fill in this form to create an account!</p>
+        <hr>
         <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-				{{ form.Email (class="form-control") }}
-			</div>
+            EMAIL
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                {{ form.Email (class="form-control") }}
+            </div>
         </div>
         <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				{{ form.csrf_token }}
+            PASSWORD
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                {{ form.csrf_token }}
                 {{ form.Password (class="form-control") }}
-			</div>
+            </div>
         </div>
 
 
-		<div class="form-group">
-			<div class="input-group">
+        <div class="form-group">
+            CONFIRM PASSWORD
+            <div class="input-group">
 				<span class="input-group-addon">
 					<i class="fa fa-lock"></i>
 					<i class="fa fa-check"></i>
 				</span>
-				{{ form.csrf_token }}
+                {{ form.csrf_token }}
                 {{ form.Confirm_password (class="form-control") }}
-			</div>
+            </div>
         </div>
-       <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-user"></i></span>
-				{{ form.Name (class="form-control") }}
-			</div>
+        <div class="form-group">
+            NAME
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                {{ form.Name (class="form-control") }}
+            </div>
         </div>
-       <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-user"></i></span>
-				{{ form.csrf_token }}
+        <div class="form-group">
+            SURNAME
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                {{ form.csrf_token }}
                 {{ form.Surname (class="form-control") }}
-			</div>
+            </div>
         </div>
-       <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-phone"></i></span>
-				{{ form.Telephone (class="form-control") }}
-			</div>
+        <div class="form-group">
+            TELEPHONE
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                {{ form.Telephone (class="form-control") }}
+            </div>
         </div>
-      <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-				{{ form.csrf_token }}
+        <div class="form-group">
+            BIRTHDATE
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                {{ form.csrf_token }}
                 {{ form.Birthdate (class="form-control") }}
-			</div>
+            </div>
         </div>
-      <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-				{{ form.csrf_token }}
+        <div class="form-group">
+            IDENTITY CARD NUMBER
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+                {{ form.csrf_token }}
                 {{ form.CardNumber (class="form-control") }}
-			</div>
-      </div>
-        <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-building"></i></span>
-            {{ form.csrf_token }}
-            {{ form.Municipality (class="form-control") }}
+            </div>
         </div>
-      </div>
+        <div class="form-group">
+            MUNICIPALITY
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-building"></i></span>
+                {{ form.csrf_token }}
+                {{ form.Municipality (class="form-control") }}
+            </div>
+        </div>
 
-      <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-				{{ form.csrf_token }}
+        <div class="form-group">
+            IDENTITY CARD EXPIRATION
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+                {{ form.csrf_token }}
                 {{ form.IdcardExp (class="form-control") }}
-			</div>
+            </div>
         </div>
 
-      <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-bank"></i></span>
-				{{ form.csrf_token }}
+        <div class="form-group">
+            IBAN
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-bank"></i></span>
+                {{ form.csrf_token }}
                 {{ form.Iban (class="form-control") }}
-			</div>
+            </div>
         </div>
-      <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-car"></i></span>
-				{{ form.csrf_token }}
+        <div class="form-group">
+            DRIVE LICENSE <NUMBER></NUMBER>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-car"></i></span>
+                {{ form.csrf_token }}
                 {{ form.DriveLicense (class="form-control") }}
-			</div>
+            </div>
         </div>
 
-     <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-building-o"></i></span>
-				{{ form.csrf_token }}
+        <div class="form-group">
+            DEPARTMENT OF MOTOR VEHICLES
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+                {{ form.csrf_token }}
                 {{ form.Department (class="form-control") }}
-			</div>
+            </div>
         </div>
 
-          <div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-car"></i></span>
-				{{ form.csrf_token }}
+        <div class="form-group">
+            DRIVE LICENSE EXPIRATION
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-car"></i></span>
+                {{ form.csrf_token }}
                 {{ form.driveExp (class="form-control", placeholder="prova") }}
-			</div>
+            </div>
         </div>
 
 
 
         <div class="form-group">
-			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-		</div>
-		<div class="form-group">
+            <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="/conditions">Terms of Use</a> &amp; <a href="/conditions">Privacy Policy</a></label>
+
+        </div>
+    <br>
+        <div style="color: orange;position:relative;left: 26%;margin-top: -5%">
+        {% for message in get_flashed_messages() %}
+            {{ message }}
+        {% endfor %}
+        </div>
+            <div class="form-group">
+                <br>
             {{ form.Submit (class="btn btn-primary btn-lg") }}
         </div>
     </form>
-	<div class="text-center">Already have an account? <a href="/login">Login here</a></div>
+    <div class="text-center">Already have an account? <a href="/login">Login here</a></div>
 </div>
 </body>
 </html>

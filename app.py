@@ -128,7 +128,7 @@ def login():
 
 @app.route('/infocar/<Platecar>', methods=["GET", "POST"])
 def infocar(Platecar):
-    from model import Rented
+    from model import Available
     global my_car,logged_user
     global available_car
     form = AddAvailabilityForm()
@@ -138,11 +138,11 @@ def infocar(Platecar):
         if my_car[i].Plate == Platecar:
             infocar = my_car[i]
             if form.validate_on_submit():
-                car_rented = Rented(logged_user,infocar.Model,infocar.Year,infocar.Plate,
-                                    infocar.Fuel,infocar.Category,infocar.NumberOfSeats,
-                                    infocar.PickupLocation,infocar.DeliveryLocation,
-                                    infocar.DailyPrice, infocar.Optional,infocar.Photo,
-                                    form.StartDate.data,form.EndDate.data)
+                car_rented = Available(logged_user, infocar.Model, infocar.Year, infocar.Plate,
+                                       infocar.Fuel, infocar.Category, infocar.NumberOfSeats,
+                                       infocar.PickupLocation, infocar.DeliveryLocation,
+                                       infocar.DailyPrice, infocar.Optional, infocar.Photo,
+                                       form.StartDate.data, form.EndDate.data)
                 available_car.insert(j, car_rented)
 
                 db.session.add(car_rented)
@@ -166,6 +166,12 @@ def logout():
     session['logged_in'] = False
     return render_template('homepage/index.html', form = form)
 
+def is_rented(plate):
+    global rented_car
+    for i in range(len(rented_car)):
+        if plate != rented_car[i].Plate:
+            return True
+    return False
 
 @app.route("/searchcar", methods=['GET', 'POST'])
 def search():
@@ -181,7 +187,6 @@ def search():
                 if available_car[i].Email != logged_user:
                     car.insert(i, available_car[i])
                     i = i + 1
-
     return render_template('Search_Car/index.html', form = form, car = car, logged_user =logged_user, rented_car = rented_car)
 
 
@@ -198,6 +203,7 @@ def delete(Plate):
 
 @app.route('/inforantecar/<Platecar>', methods=["GET", "POST"])
 def inforatecar(Platecar):
+    from model import Rented
     global my_car,logged_user, rented_car,available_car
     form = AddAvailabilityForm()
     infocar = None
@@ -207,9 +213,16 @@ def inforatecar(Platecar):
             infocar = available_car[i]
     if request.method == 'GET':
         rented_car.insert(j,infocar)
-
-        print("ciao")
         j = j + 1
+        rented = Rented(logged_user,infocar.Model,infocar.Year,infocar.Plate,
+                        infocar.Fuel,infocar.Category,infocar.NumberOfSeats,
+                        infocar.PickupLocation,infocar.DeliveryLocation,
+                        infocar.DailyPrice,infocar.Optional,infocar.Photo,
+                        infocar.Start,infocar.End)
+        db.session.add(rented)
+        db.session.commit()
+
+
 
     return render_template('inforantecar/index.html', infocar = infocar, form = form)
 
@@ -250,6 +263,13 @@ def deleterent(Plate):
 def aboutus():
     return render_template('about_us/index.html')
 
+@app.route("/forgotpassword")
+def forgot_password():
+    return render_template('forgot_password/index.html')
+
+@app.route("/conditions")
+def conditions():
+    return render_template('conditions/index.html')
 
 if __name__ == '__main__':
     db.create_all()

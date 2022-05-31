@@ -1,7 +1,7 @@
 # Carrent
 
 Carrent is a web app to upload and rent cars make by Flask.
-The backend side was managed by sqlalchemy ORM and Sqlite database engine.
+The back-end side was managed by sqlalchemy ORM and Sqlite database engine.
 
 the site allows you to:
 <li>register

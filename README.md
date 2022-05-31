@@ -8,6 +8,9 @@ the site allows you to:
 <li>log out
 <li>load a car 
 <li>make a car available for a chosen period
-<li>search for a car
+<li>search for a car in a chosen period
 <li>rent a car
-<li>looking for a car in a chosen period
+
+ <br>
+  <br>
+  <img src="https://github.com/Xorion99/Easy-Event/blob/master/appearance/demo1.PNG">
